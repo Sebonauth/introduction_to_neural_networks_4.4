@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Inputs: When Life Gets More Complex</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            font-size: 150%;
+        }
+        section {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #ffffff;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+        h1, h3, h4 {
+            color: #333;
+            margin-top: 20px;
+        }
+        p, li {
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 20px;
+        }
+        .interactive-placeholder img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .vocab-section {
+            background-color: #f0f8ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .vocab-section h3 {
+            color: #1e90ff;
+            font-size: 0.75em;
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+        .vocab-section h4 {
+            color: #000;
+            font-size: 0.9em;
+            margin-top: 10px;
+            margin-bottom: 8px;
+        }
+        .stop-and-think {
+            background-color: #e6e6ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .stop-and-think h3 {
+            color: #4b0082;
+            font-size: 0.75em;
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+        .stop-and-think h4 {
+            color: #000;
+            font-size: 0.9em;
+            margin-top: 10px;
+            margin-bottom: 8px;
+        }
+        .continue-button, .reveal-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 15px;
+            color: #ffffff;
+            background-color: #007bff;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .reveal-button {
+            background-color: #4b0082;
+        }
+    </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <section id="section1">
+        <h1>Multiple Inputs: When Life Gets More Complex</h1>
+        <p>Of course, real life is rarely as simple as predicting house prices based on just size. What about the number of bedrooms, the age of the house, or the distance to the nearest coffee shop (a crucial factor in some neighborhoods!)?</p>
+        <div class="interactive-placeholder">
+            <img src="/placeholder.svg?height=300&width=600" alt="Interactive visualization showing multiple sliding inputs affecting a house price prediction">
+        </div>
+        <p>Let's see how both approaches handle multiple inputs. In linear regression, we simply add more terms:</p>
+        <p>\[ \text{Price} = m_1(\text{size}) + m_2(\text{bedrooms}) + m_3(\text{age}) + b \]</p>
+        <div class="continue-button" onclick="showNextSection(2)">Continue</div>
+    </section>
+
+    <section id="section2">
+        <p>Our neural network does exactly the same thing, just with its own terminology:</p>
+        <p>\[ \text{Price} = w_1(\text{size}) + w_2(\text{bedrooms}) + w_3(\text{age}) + b \]</p>
+        <div class="vocab-section">
+            <h3>Build Your Vocab</h3>
+            <h4>Weights</h4>
+            <p>The neural network equivalent of regression coefficients. They determine how much importance the network gives to each input.</p>
+        </div>
+        <div class="continue-button" onclick="showNextSection(3)">Continue</div>
+    </section>
+
+    <section id="section3">
+        <p>Mathematicians love to write this more compactly using vector notation (and who can blame them?):</p>
+        <p>\[ y = \mathbf{w}^T\mathbf{x} + b \]</p>
+        <div class="stop-and-think">
+            <h3>Stop and Think</h3>
+            <h4>Why do you think using vector notation is helpful?</h4>
+            <button class="reveal-button" onclick="revealAnswer()">Reveal Answer</button>
+            <p id="reveal-text" style="display: none;">Imagine writing out an equation with 1000 inputs! Vector notation keeps things clean and makes it easier to work with large-scale problems.</p>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById("section1").style.display = "block";
+        document.getElementById("section1").style.opacity = "1";
+
+        function showNextSection(nextSectionId) {
+            const currentButton = event.target;
+            const nextSection = document.getElementById("section" + nextSectionId);
+            
+            currentButton.style.display = "none";
+            
+            nextSection.style.display = "block";
+            setTimeout(() => {
+                nextSection.style.opacity = "1";
+            }, 10);
+
+            setTimeout(() => {
+                nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 500);
+        }
+
+        function revealAnswer() {
+            const revealText = document.getElementById("reveal-text");
+            const revealButton = document.querySelector(".reveal-button");
+            
+            revealText.style.display = "block";
+            revealButton.style.display = "none";
+        }
+    </script>
+</body>
+</html>
